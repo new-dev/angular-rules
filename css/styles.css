@@ -10,10 +10,47 @@ StyleSheet Index
 /*------------------------------------------------------
 1.0 Globals
 ------------------------------------------------------*/
+body {
+    background-color: #efefef;
+}
 
+h4:hover {
+    color: darkgray;
+}
 /*------------------------------------------------------
 2.0 Common Components
 ------------------------------------------------------*/
+.header {
+    padding: 10px 20px 10px 20px;
+}
+
+.header-title {
+    color: dimgrey;
+}
+
+.header-options {
+    float: right;
+    margin-top: -45px;
+}
+
+.block {
+    text-align: center;
+    padding-top: 40px;
+}
+
+.block-content {
+    background-color: #fff;
+    padding: 10px 20px 10px 20px;
+    margin-left: 5%;
+    margin-right: 5%;
+    box-shadow: 0 1px 2px rgb(189, 189, 189);
+}
+
+.line-break {
+    padding-top: 20px;
+    border-top: 1px solid #deddda;
+}
+
 
 /*------------------------------------------------------
 3.0
