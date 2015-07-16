@@ -1,10 +1,15 @@
 var app = angular.module('App',[]);
 
 app.controller('mainCtrl', function($scope){
-    $scope.dimension = 5;
+    $scope.dimension = 3;
     $scope.numberOfLetters = $scope.dimension*$scope.dimension;
     $scope.wordLength = 100;
-
+    $scope.tiles =[];
+    $scope.selectedLetters =[];
+    $scope.setWidthOfTiles = {
+        width : 100/$scope.dimension+'%',
+        height: 100/$scope.dimension+'%'
+    };
     $scope.page = {
         'name' : 'Un-named',
         'title' : 'Hello'
@@ -14,53 +19,28 @@ app.controller('mainCtrl', function($scope){
         this.letter = letter;
         this.clicked = clicked;
     }
-    function row(tileArray) {
-        this.row = tileArray;
-    }
 
-    $scope.letters = [];
-    $scope.rows = [];
-    $scope.splitList = [];
 
     function generateLetters() {
         var letter = '',
             newObject = {},
-            i = 0;
-
+            i;
         for (i=0; i < $scope.numberOfLetters; i++) {
-            letter = String.fromCharCode(65+i);
-            newObject = new tile(letter, false);
-            $scope.letters.push(newObject);
+            newObject = new tile(String.fromCharCode(65+i), false);
+            $scope.tiles.push(newObject);
         }
-        console.log($scope.letters);
     }
 
-    function splitLetters() {
-        var i = 0,
-            newObject = {};
-        for(i = 0; i < $scope.numberOfLetters; i+=$scope.dimension) {
-            newObject = new row($scope.letters.slice(i,i+$scope.dimension));
-            $scope.rows.push(newObject);
-        }
-        console.log($scope.rows);
-    }
-
-    generateLetters();
-    splitLetters();
-
-    $scope.selectedLetters =[];
-
-    $scope.selectLetter = function(letter, childIndex, parentIndex) {
+    $scope.selectLetter = function(letter, index) {
         if($scope.selectedLetters.length < $scope.wordLength) {
             $scope.selectedLetters.push(letter);
-            //$scope.rows[childIndex]
-            $scope.rows[parentIndex].row[childIndex].clicked = !$scope.rows[parentIndex].row[childIndex].clicked;
+            $scope.tiles[index].clicked = !$scope.tiles[index].clicked;
         }
     };
 
-    /*Sets the Width of the tiles in the css*/
-    $scope.setWidthOfTiles = {
-        width : 100/$scope.dimension+'%',
-        height: 100/$scope.dimension+'%'
-    }
+    $scope.init = function(){
+        generateLetters();
+    };
+
+    $scope.init();
 });

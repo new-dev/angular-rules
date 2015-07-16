@@ -22,16 +22,12 @@
 </div>
 <!--Game content-->
 <div class="tile-table">
-    <div ng-repeat="row in rows">
-        <div ng-repeat="tiles in row">
-            <div ng-repeat="tile in tiles" ng-click="selectLetter(tile.letter, $index, $parent.$parent.$index)">
-                <div class="tile" ng-style="setWidthOfTiles" ng-show="!tile.clicked">
-                    {{tile.letter}}
-                </div>
-                <div class="tile clicked" ng-style="setWidthOfTiles" ng-show="tile.clicked">
-                    {{tile.letter}}
-                </div>
-            </div>
+    <div ng-repeat="tile in tiles" ng-click="selectLetter(tile.letter, $index, $parent.$parent.$index)">
+        <div class="tile" ng-style="setWidthOfTiles" ng-show="!tile.clicked">
+            {{tile.letter}}
+        </div>
+        <div class="tile clicked" ng-style="setWidthOfTiles" ng-show="tile.clicked">
+            {{tile.letter}}
         </div>
     </div>
 </div>
