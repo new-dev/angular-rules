@@ -22,7 +22,7 @@
 </div>
 <!--Game content-->
 <div class="tile-table">
-    <div ng-repeat="tile in tiles" ng-click="selectLetter(tile.letter, $index, $parent.$parent.$index)">
+    <div ng-repeat="tile in tiles" ng-click="selectLetter(tile.letter, $index)">
         <div class="tile" ng-style="setWidthOfTiles" ng-show="!tile.clicked">
             {{tile.letter}}
         </div>
