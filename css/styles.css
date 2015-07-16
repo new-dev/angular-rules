@@ -51,51 +51,21 @@ h4:hover {
     border-top: 1px solid #deddda;
 }
 
-.letter-table {
-    margin-top: 20px;
+.tile-table {
+    position: relative;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    background-color: white;
 }
 
-.letter {
-    font-size: 5em;
-    border-style: solid;
-    border-color: #deddda;
-    border-width: 1px;
-    background-color: #cfefef;
-    margin: 5px 5px 5px 5px;
-}
-
-.letter:hover {
-    background-color: #cfdfdf;
-    cursor: pointer;
-}
-
-.letter-clicked {
-    font-size: 5em;
-    border-style: solid;
-    border-color: #cecdca;
-    border-width: 1px;
-    background-color: #888888;
-    margin: 5px 5px 5px 5px;
-}
-
-.letter-clicked:hover {
-    background-color: #cfdfdf;
-    cursor: pointer;
-}
-
-.selected-list {
-    margin-top: 20px;
-    float: left;
-}
-
-.selected-letter {
+.tile {
     float: left;
     font-size: 5em;
     border-style: solid;
-    border-color: #deddda;
+    border-color: #efefef;
     border-width: 1px;
     background-color: #cfefef;
-    margin: 5px 5px 5px 5px;
 }
 
 /*------------------------------------------------------
