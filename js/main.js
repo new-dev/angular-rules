@@ -4,8 +4,8 @@ app.controller('mainCtrl', function($scope){
     $scope.dimension = 3;
     $scope.numberOfLetters = $scope.dimension*$scope.dimension;
     $scope.wordLength = 100;
-    $scope.tiles =[];
-    $scope.selectedLetters =[];
+    $scope.tiles = [];
+    $scope.selectedLetters = [];
     $scope.setWidthOfTiles = {
         width : 100/$scope.dimension+'%',
         height: 100/$scope.dimension+'%'
@@ -19,7 +19,6 @@ app.controller('mainCtrl', function($scope){
         this.letter = letter;
         this.clicked = clicked;
     }
-
 
     function generateLetters() {
         var letter = '',
@@ -38,7 +37,7 @@ app.controller('mainCtrl', function($scope){
         }
     };
 
-    $scope.init = function(){
+    $scope.init = function() {
         generateLetters();
     };
 
