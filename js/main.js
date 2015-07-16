@@ -1,7 +1,7 @@
 var app = angular.module('App',[]);
 
 app.controller('mainCtrl', function($scope){
-    $scope.dimension = 4;
+    $scope.dimension = 5;
     $scope.numberOfLetters = $scope.dimension*$scope.dimension;
     $scope.wordLength = 4;
 
@@ -56,5 +56,11 @@ app.controller('mainCtrl', function($scope){
             //$scope.rows[childIndex]
             $scope.rows[parentIndex].row[childIndex].clicked = !$scope.rows[parentIndex].row[childIndex].clicked;
         }
+    };
+
+    /*Sets the Width of the tiles in the css*/
+    $scope.setWidthOfTiles = {
+        width : 100/$scope.dimension+'%',
+        height: 100/$scope.dimension+'%'
     }
 });
