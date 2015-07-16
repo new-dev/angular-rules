@@ -23,12 +23,17 @@
 </div>
 <div class="container">
     <div class="letter-table">
-        <div ng-repeat="row in rows">
+        <div ng-repeat="row in rows" >
             <div class="row">
                 <div class="col-md-4"></div>
                 <div ng-repeat="tiles in row">
                     <div ng-repeat="tile in tiles">
-                        <div class="col-md-1 text-center letter" ng-click="selectLetter(letter, $index)">{{tile.letter}}</div>
+                        <div ng-show="tile.clicked">
+                            <div class="col-md-1 text-center letter-clicked" ng-click="selectLetter(letter, $index, $parent.$parent.$index)">{{tile.letter}}</div>
+                        </div>
+                        <div ng-show="!tile.clicked">
+                            <div class="col-md-1 text-center letter" ng-click="selectLetter(letter, $index, $parent.$parent.$index)">{{tile.letter}}</div>
+                        </div>
                     </div>
                 </div>
             </div>

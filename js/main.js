@@ -3,6 +3,7 @@ var app = angular.module('App',[]);
 app.controller('mainCtrl', function($scope){
     $scope.dimension = 4;
     $scope.numberOfLetters = $scope.dimension*$scope.dimension;
+    $scope.wordLength = 4;
 
     $scope.page = {
         'name' : 'Un-named',
@@ -49,8 +50,11 @@ app.controller('mainCtrl', function($scope){
 
     $scope.selectedLetters =[];
 
-    $scope.selectLetter = function(letter, index) {
-        if($scope.selectedLetters.length < 3)
+    $scope.selectLetter = function(letter, childIndex, parentIndex) {
+        if($scope.selectedLetters.length < $scope.wordLength) {
             $scope.selectedLetters.push(letter);
+            //$scope.rows[childIndex]
+            $scope.rows[parentIndex].row[childIndex].clicked = !$scope.rows[parentIndex].row[childIndex].clicked;
+        }
     }
 });
