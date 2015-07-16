@@ -9,7 +9,6 @@
     <script type="text/javascript" src="../js/main.js"></script>
 </head>
 <body class="container-fluid">
-<!--content-->
 <div class="header">
     <h1 class="header-title">{{page.title}}</h1>
     <div class="header-options">
@@ -21,24 +20,17 @@
         </button>
     </div>
 </div>
-<div class="container">
-    <div class="letter-table">
-        <div ng-repeat="row in rows" >
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div ng-repeat="tiles in row">
-                    <div ng-repeat="tile in tiles">
-                        <div ng-show="tile.clicked">
-                            <div class="col-md-1 text-center letter-clicked" ng-click="selectLetter(letter, $index, $parent.$parent.$index)">{{tile.letter}}</div>
-                        </div>
-                        <div ng-show="!tile.clicked">
-                            <div class="col-md-1 text-center letter" ng-click="selectLetter(letter, $index, $parent.$parent.$index)">{{tile.letter}}</div>
-                        </div>
-                    </div>
+<!--Game content-->
+<div class="tile-table">
+    <div ng-repeat="row in rows">
+        <div ng-repeat="tiles in row">
+            <div ng-repeat="tile in tiles">
+                <div class="tile" ng-style="setWidthOfTiles">
+                    {{tile.letter}}
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!--end of content-->
+<!--end of Game content-->
 </body>
