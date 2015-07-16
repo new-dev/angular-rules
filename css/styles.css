@@ -51,6 +51,38 @@ h4:hover {
     border-top: 1px solid #deddda;
 }
 
+.letter-table {
+    margin-top: 20px;
+}
+
+.letter {
+    font-size: 5em;
+    border-style: solid;
+    border-color: #deddda;
+    border-width: 1px;
+    background-color: #cfefef;
+    margin: 5px 5px 5px 5px;
+}
+
+.letter:hover {
+    background-color: #cfdfdf;
+    cursor: pointer;
+}
+
+.selected-list {
+    margin-top: 20px;
+    float: left;
+}
+
+.selected-letter {
+    float: left;
+    font-size: 5em;
+    border-style: solid;
+    border-color: #deddda;
+    border-width: 1px;
+    background-color: #cfefef;
+    margin: 5px 5px 5px 5px;
+}
 
 /*------------------------------------------------------
 3.0

@@ -21,13 +21,18 @@
         </button>
     </div>
 </div>
-<div class="block">
-    <div class="block-content">
-        <h3>Welcome to word finder</h3>
-        <div class="line-break"></div>
-        <h4>Click on the plus to add a friend</h4>
-        <div class="line-break"></div>
-        <h4>Click on the play to start</h4>
+<div class="container">
+    <div class="letter-table">
+        <div ng-repeat="row in rows">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div ng-repeat="tiles in row">
+                    <div ng-repeat="tile in tiles">
+                        <div class="col-md-1 text-center letter" ng-click="selectLetter(letter, $index)">{{tile.letter}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!--end of content-->
