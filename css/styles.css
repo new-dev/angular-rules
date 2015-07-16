@@ -66,6 +66,14 @@ h4:hover {
     border-color: #efefef;
     border-width: 1px;
     background-color: #cfefef;
+    cursor: pointer;
+}
+.tile:hover {
+    background-color: #dff5f5;
+}
+
+.clicked {
+    background-color: #afcfcf;
 }
 
 /*------------------------------------------------------

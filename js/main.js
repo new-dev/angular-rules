@@ -3,7 +3,7 @@ var app = angular.module('App',[]);
 app.controller('mainCtrl', function($scope){
     $scope.dimension = 5;
     $scope.numberOfLetters = $scope.dimension*$scope.dimension;
-    $scope.wordLength = 4;
+    $scope.wordLength = 100;
 
     $scope.page = {
         'name' : 'Un-named',
