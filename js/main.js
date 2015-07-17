@@ -1,11 +1,14 @@
 var app = angular.module('App',[]);
 
 app.controller('mainCtrl', function($scope){
-    $scope.dimension = 3;
+    $scope.dimension = 4;
     $scope.numberOfLetters = $scope.dimension*$scope.dimension;
-    $scope.wordLength = 3;
+    $scope.wordLength = 4;
     $scope.tiles = [];
     $scope.selectedLetters = [];
+    $scope.alphabete = [
+        'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'
+    ];
     $scope.setWidthOfTiles = {
         width : 100/$scope.dimension + '%',
         height : 100/$scope.dimension + '%'
@@ -25,13 +28,14 @@ app.controller('mainCtrl', function($scope){
     }
 
     function generateLetters() {
-        var letter = '',
-            newObject = {},
+        var newObject = {},
             i;
         for (i=0; i < $scope.numberOfLetters; i++) {
-            newObject = new tile(String.fromCharCode(65+i), false);
+            newObject = new tile($scope.alphabete[Math.floor((Math.random() * 25) + 0)], false);
             $scope.tiles.push(newObject);
         }
+
+        console.log($scope.alphabete);
     }
 
     $scope.selectLetter = function(letter, index) {
