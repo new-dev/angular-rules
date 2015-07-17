@@ -8,7 +8,7 @@
     <script src="http://code.angularjs.org/snapshot/angular.js"></script>
     <script type="text/javascript" src="../js/main.js"></script>
 </head>
-<body class="container-fluid">
+<body >
 <div class="header">
     <h1 class="header-title">{{page.title}}</h1>
     <div class="header-options">
@@ -21,18 +21,20 @@
     </div>
 </div>
 <!--Game content-->
-<div class="tile-table">
-    <div ng-repeat="tile in tiles" ng-click="selectLetter(tile.letter, $index)">
-        <div class="tile" ng-style="setWidthOfTiles" ng-show="!tile.clicked">
-            {{tile.letter}}
+<div class="block">
+    <div class="tile-table">
+        <div ng-repeat="tile in tiles track by $index" ng-click="selectLetter(tile.letter, $index)">
+            <button class="tile btn btn-lg btn-info" ng-style="setWidthOfTiles" ng-show="!tile.clicked">
+                {{tile.letter}}
+            </button>
+            <button class="tile btn btn-lg btn-warning clicked" ng-style="setWidthOfTiles" ng-show="tile.clicked">
+                {{tile.letter}}
+            </button>
         </div>
-        <div class="tile clicked" ng-style="setWidthOfTiles" ng-show="tile.clicked">
-            {{tile.letter}}
-        </div>
-    </div>
-    <div ng-repeat="letter in selectedLetters">
-        <div class="letter" ng-style="setWidthOfLetters">
-            {{letter}}
+        <div ng-repeat="letter in selectedLetters track by $index">
+            <button class="letter btn btn-lg btn-warning" ng-style="setWidthOfLetters">
+                {{letter}}
+            </button>
         </div>
     </div>
 </div>

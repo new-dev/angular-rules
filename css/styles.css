@@ -34,8 +34,16 @@ h4:hover {
 }
 
 .block {
-    text-align: center;
-    padding-top: 40px;
+    position: absolute;
+    width: 90%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 50px 20px 50px 20px;
+
+    background-color: white;
+    border-radius: 10px;
 }
 
 .block-content {
@@ -57,23 +65,17 @@ h4:hover {
     width: 60%;
     text-align: center;
     background-color: white;
+    border-radius: 10px;
+
 }
 
 .tile {
     float: left;
     font-size: 5em;
+    border-radius: 0;
     border-style: solid;
-    border-color: #efefef;
-    border-width: 1px;
-    background-color: #cfefef;
-    cursor: pointer;
-}
-.tile:hover {
-    background-color: #dff5f5;
-}
-
-.clicked {
-    background-color: #afcfcf;
+    border-width: 20px;
+    text-decoration: underline;
 }
 
 .selected-tile-table {
@@ -86,20 +88,14 @@ h4:hover {
 
 .letter {
     float: left;
-    color: black;
-    margin-top: 100px;
-    font-size: 4em;
+    margin-top: 60px;
+    font-size: 4.5em;
+    border-radius: 0;
     border-style: solid;
-    border-color: #efefef;
     border-width: 20px;
     text-decoration: underline;
-    cursor: pointer;
-    background-color: seashell;
 }
 
-.letter:hover{
-    background-color: deepskyblue;
-}
 
 /*------------------------------------------------------
 3.0

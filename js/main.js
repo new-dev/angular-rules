@@ -35,9 +35,14 @@ app.controller('mainCtrl', function($scope){
     }
 
     $scope.selectLetter = function(letter, index) {
-        if($scope.selectedLetters.length < $scope.wordLength) {
-            $scope.selectedLetters.push(letter);
-            $scope.tiles[index].clicked = !$scope.tiles[index].clicked;
+        if ($scope.selectedLetters.length < $scope.wordLength) {
+            if (!$scope.tiles[index].clicked) {
+                $scope.selectedLetters.push(letter);
+                $scope.tiles[index].clicked = !$scope.tiles[index].clicked;
+            }
+            else {
+                $scope.tiles[index].clicked = !$scope.tiles[index].clicked;
+            }
         }
     };
 
