@@ -30,6 +30,11 @@
             {{tile.letter}}
         </div>
     </div>
+    <div ng-repeat="letter in selectedLetters">
+        <div class="letter" ng-style="setWidthOfLetters">
+            {{letter}}
+        </div>
+    </div>
 </div>
 <!--end of Game content-->
 </body>

@@ -76,6 +76,31 @@ h4:hover {
     background-color: #afcfcf;
 }
 
+.selected-tile-table {
+    padding-top: 100px;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    background-color: white;
+}
+
+.letter {
+    float: left;
+    color: black;
+    margin-top: 100px;
+    font-size: 4em;
+    border-style: solid;
+    border-color: #efefef;
+    border-width: 20px;
+    text-decoration: underline;
+    cursor: pointer;
+    background-color: seashell;
+}
+
+.letter:hover{
+    background-color: deepskyblue;
+}
+
 /*------------------------------------------------------
 3.0
 ------------------------------------------------------*/
