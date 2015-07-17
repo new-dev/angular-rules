@@ -3,12 +3,16 @@ var app = angular.module('App',[]);
 app.controller('mainCtrl', function($scope){
     $scope.dimension = 3;
     $scope.numberOfLetters = $scope.dimension*$scope.dimension;
-    $scope.wordLength = 100;
+    $scope.wordLength = 3;
     $scope.tiles = [];
     $scope.selectedLetters = [];
     $scope.setWidthOfTiles = {
-        width : 100/$scope.dimension+'%',
-        height: 100/$scope.dimension+'%'
+        width : 100/$scope.dimension + '%',
+        height : 100/$scope.dimension + '%'
+    };
+    $scope.setWidthOfLetters = {
+        width : 100/$scope.wordLength + "%",
+        height : 100/$scope.wordLength + "%"
     };
     $scope.page = {
         'name' : 'Un-named',
