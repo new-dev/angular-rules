@@ -3,7 +3,7 @@ var app = angular.module('App',[]);
 app.controller('mainCtrl', function($scope){
     $scope.dimension = 4;
     $scope.numberOfLetters = $scope.dimension*$scope.dimension;
-    $scope.wordLength = 4;
+    $scope.wordLength = 3;
     $scope.tiles = [];
     $scope.selectedLetters = [];
     $scope.alphabete = [
@@ -46,6 +46,22 @@ app.controller('mainCtrl', function($scope){
             }
             else {
                 $scope.tiles[index].clicked = !$scope.tiles[index].clicked;
+            }
+        }
+        $scope.resetTiles();
+    };
+
+    /*$scope.checkIfWord = function(word) {
+        $scope.is_correct_spelling = dictionary.check(word);
+        console.log($scope.is_correct_spelling);
+    };*/
+
+    $scope.resetTiles = function(){
+        var i;
+        if ($scope.selectedLetters.length === 3) {
+            $scope.selectedLetters = [];
+            for (i = 0; i < ($scope.dimension * $scope.dimension); i++) {
+                $scope.tiles[i].clicked = false;
             }
         }
     };
