@@ -1,11 +1,16 @@
 var app = angular.module('App',[]);
 
-app.controller('mainCtrl', function($scope){
+app.controller('mainCtrl', function($scope, $http){
     $scope.dimension = 4;
     $scope.numberOfLetters = $scope.dimension*$scope.dimension;
     $scope.wordLength = 3;
     $scope.tiles = [];
     $scope.selectedLetters = [];
+    $scope.level = 'mock1';
+    $scope.loadedData;
+    $scope.loadedDataLetters;
+    $scope.loadedDataSolutions;
+    /**Alphabete will soon go away since they will not be randomly generated, Testing Purposes Only*/
     $scope.alphabete = [
         'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'
     ];
@@ -21,22 +26,21 @@ app.controller('mainCtrl', function($scope){
         'name' : 'Un-named',
         'title' : 'Hello'
     };
-
     function tile(letter, clicked) {
         this.letter = letter;
         this.clicked = clicked;
     }
-
-    function generateLetters() {
+    $scope.generateLetters = function() {
         var newObject = {},
             i;
         for (i=0; i < $scope.numberOfLetters; i++) {
-            newObject = new tile($scope.alphabete[Math.floor((Math.random() * 25) + 0)], false);
+            /**Used Below for testing purposed of tiles. Will not be randomly generated here
+                newObject = new tile($scope.alphabete[Math.floor((Math.random() * 25) + 0)], false);
+             */
+            newObject = new tile($scope.loadedDataLetters[i],false);
             $scope.tiles.push(newObject);
         }
-
-        console.log($scope.alphabete);
-    }
+    };
 
     $scope.selectLetter = function(letter, index) {
         if ($scope.selectedLetters.length < $scope.wordLength) {
@@ -65,9 +69,15 @@ app.controller('mainCtrl', function($scope){
             }
         }
     };
-
+/*Async javascript stuff...*/
     $scope.init = function() {
-        generateLetters();
+        $http.get('../data/levelone.json').success(function(response){
+            $scope.loadedData = response.mock1;
+            console.log(response.mock1);
+            $scope.loadedDataLetters = response.mock1.letters;
+            $scope.loadedDataSolutions = response.mock1.solutions;
+            $scope.generateLetters();
+        });
     };
 
     $scope.init();
