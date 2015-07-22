@@ -4,9 +4,10 @@ app.controller('mainCtrl', function($scope, $http){
     $scope.dimension = 4;
     $scope.numberOfLetters = $scope.dimension*$scope.dimension;
     $scope.wordLength = 3;
+    $scope.score = 0;
     $scope.tiles = [];
     $scope.selectedLetters = [];
-    $scope.level = 'mock1';
+    /**All are being set at the moment. Will decide which one we want later..*/
     $scope.loadedData;
     $scope.loadedDataLetters;
     $scope.loadedDataSolutions;
@@ -52,13 +53,20 @@ app.controller('mainCtrl', function($scope, $http){
                 $scope.tiles[index].clicked = !$scope.tiles[index].clicked;
             }
         }
+        $scope.checkIfWord($scope.selectedLetters.join(""));
         $scope.resetTiles();
     };
 
-    /*$scope.checkIfWord = function(word) {
-        $scope.is_correct_spelling = dictionary.check(word);
-        console.log($scope.is_correct_spelling);
-    };*/
+    $scope.checkIfWord = function(word) {
+        var index = $scope.loadedDataSolutions.indexOf(word);
+        if (index == -1)
+            console.log("Not a Word");
+        else {
+            console.log("Good Job, its a word");
+            $scope.score++;
+            $scope.loadedDataSolutions.splice(index, 1);
+        }
+    };
 
     $scope.resetTiles = function(){
         var i;
