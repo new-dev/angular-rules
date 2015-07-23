@@ -4,6 +4,7 @@ app.controller('mainCtrl', function($scope, $http){
     $scope.dimension = 4;
     $scope.numberOfLetters = $scope.dimension*$scope.dimension;
     $scope.wordLength = 3;
+    $scope.world = 1;
     $scope.score = 0;
     $scope.tiles = [];
     $scope.selectedLetters = [];
@@ -78,8 +79,8 @@ app.controller('mainCtrl', function($scope, $http){
         }
     };
 /*Async javascript stuff...*/
-    $scope.init = function() {
-        $http.get('../data/levelone.json').success(function(response){
+    $scope.init = function(world) {
+        $http.get('../data/world'+world+'.json').success(function(response){
             $scope.loadedData = response.mock1;
             console.log(response.mock1);
             $scope.loadedDataLetters = response.mock1.letters;
@@ -88,5 +89,5 @@ app.controller('mainCtrl', function($scope, $http){
         });
     };
 
-    $scope.init();
+    $scope.init($scope.world);
 });

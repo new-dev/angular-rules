@@ -1,0 +1,16 @@
+{
+  "mock1": {
+    "letters":["c","a","t","r","a","e","r","a","l","o","p","i","w","m","o","l"],
+    "solutions":["cat","tac","car","rat","real","mole","rap","ale","art","trip","race","pole","moo","arrow","ate","tea"]
+  },
+
+  "mock2": {
+    "letters":["c","a","t","r","a","e","r","a","l","o","p","i","w","m","o","j"],
+    "solutions":["cat","tac","car","rat","real","mole","rap","ale","art","trip","race","pole","moo","arrow"]
+  },
+
+  "mock3": {
+    "letters":["c","a","t","r","a","e","r","a","l","o","p","i","w","m","o","j"],
+    "solutions":["cat","tac","car","rat","real","mole","rap","ale","art","trip","race","pole","moo","arrow"]
+  }
+}
