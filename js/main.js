@@ -1,102 +1,100 @@
 var app = angular.module('App',[]);
 
-app.controller('mainCtrl', function($scope, $http){
-    $scope.dimension = 4;
-    $scope.numberOfLetters = $scope.dimension*$scope.dimension;
-    $scope.wordLength = 3;
-    $scope.world = 1;
-    $scope.level = "level1";
-    $scope.score = 0;
-    $scope.tiles = [];
-    $scope.selectedLetters = [];
-    /**All are being set at the moment. Will decide which one we want later..*/
-    $scope.loadedData = {};
-    $scope.loadedDataLetters = [];
-    $scope.loadedDataSolutions = [];
-    /**Alphabete will soon go away since they will not be randomly generated, Testing Purposes Only*/
-    $scope.alphabete = [
-        'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'
-    ];
-    $scope.setWidthOfTiles = {
-        width : 100/$scope.dimension + '%',
-        height : 100/$scope.dimension + '%'
-    };
-    $scope.setWidthOfLetters = {
-        width : 100/$scope.wordLength + "%",
-        height : 100/$scope.wordLength + "%"
-    };
-    $scope.page = {
-        'name' : 'Un-named',
-        'title' : 'Hello'
-    };
-    function tile(letter, clicked) {
+app.controller('mainCtrl', function($scope, gameFactory){
+    gameFactory.getTiles().then(function(){
+        $scope.tiles = gameFactory.tiles;
+    });
+});
+
+app.factory('gameFactory', function($http){
+    var gameFactory = {};
+    gameFactory.tileObj = function(letter, clicked) {
         this.letter = letter;
         this.clicked = clicked;
-    }
+    };
+    gameFactory.dimension = 4;
+    gameFactory.numberOfLetters = gameFactory.dimension*gameFactory.dimension;
+    gameFactory.wordLength = 3;
+    gameFactory.world = 1;
+    gameFactory.level = "level1";
+    gameFactory.score = 0;
+    gameFactory.tiles = [];
+    gameFactory.selectedLetters = [];
+
 
     /*Async javascript stuff...*/
-    $scope.initLevel = function(world) {
+    gameFactory.initLevel = function(world) {
         $http.get('../data/world'+world+'.json').success(function(response){
-            $scope.loadedData = angular.fromJson(response);
-            $scope.initDataVariables();
+            gameFactory.loadedData = angular.fromJson(response);
+            gameFactory.initDataVariables();
         });
     };
 
-    $scope.initDataVariables = function(){
-        $scope.loadedDataLetters = $scope.loadedData[$scope.level].letters;
-        $scope.loadedDataSolutions = $scope.loadedData[$scope.level].solutions;
+    gameFactory.initDataVariables = function(){
+        gameFactory.loadedDataLetters = gameFactory.loadedData[gameFactory.level].letters;
+        gameFactory.loadedDataSolutions = gameFactory.loadedData[gameFactory.level].solutions;
         //Can have more laterrr
 
-        $scope.generateLetters();
+        gameFactory.generateLetters();
     };
 
-    $scope.generateLetters = function() {
+    gameFactory.generateLetters = function() {
         var newObject = {},
             i;
-        for (i=0; i < $scope.numberOfLetters; i++) {
+        for (i=0; i < gameFactory.numberOfLetters; i++) {
             /**Used Below for testing purposed of tiles. Will not be randomly generated here
-                newObject = new tile($scope.alphabete[Math.floor((Math.random() * 25) + 0)], false);
+             newObject = new tile(gameFactory.alphabete[Math.floor((Math.random() * 25) + 0)], false);
              */
-            newObject = new tile($scope.loadedDataLetters[i],false);
-            $scope.tiles.push(newObject);
+            newObject = new gameFactory.tileObj(gameFactory.loadedDataLetters[i],false);
+            gameFactory.tiles.push(newObject);
         }
     };
 
-    $scope.selectLetter = function(letter, index) {
-        if ($scope.selectedLetters.length < $scope.wordLength) {
-            if (!$scope.tiles[index].clicked) {
-                $scope.selectedLetters.push(letter);
-                $scope.tiles[index].clicked = !$scope.tiles[index].clicked;
+    gameFactory.selectLetter = function(letter, index) {
+        if (gameFactory.selectedLetters.length < gameFactory.wordLength) {
+            if (!gameFactory.tiles[index].clicked) {
+                gameFactory.selectedLetters.push(letter);
+                gameFactory.tiles[index].clicked = !gameFactory.tiles[index].clicked;
             }
             else {
-                $scope.tiles[index].clicked = !$scope.tiles[index].clicked;
+                gameFactory.tiles[index].clicked = !gameFactory.tiles[index].clicked;
             }
         }
-        $scope.checkIfWord($scope.selectedLetters.join(""));
-        $scope.resetTiles();
+        gameFactory.checkIfWord(gameFactory.selectedLetters.join(""));
+        gameFactory.resetTiles();
     };
 
-    $scope.checkIfWord = function(word) {
-        var index = $scope.loadedDataSolutions.indexOf(word);
+    gameFactory.checkIfWord = function(word) {
+        var index = gameFactory.loadedDataSolutions.indexOf(word);
         if (index == -1)
             console.log("Not a Word");
         else {
             console.log("Good Job, its a word");
-            $scope.score++;
-            $scope.loadedDataSolutions.splice(index, 1);
+            gameFactory.score++;
+            gameFactory.loadedDataSolutions.splice(index, 1);
         }
     };
 
-    $scope.resetTiles = function(){
+    gameFactory.resetTiles = function(){
         var i;
-        if ($scope.selectedLetters.length === 3) {
-            $scope.selectedLetters = [];
-            for (i = 0; i < ($scope.dimension * $scope.dimension); i++) {
-                $scope.tiles[i].clicked = false;
+        if (gameFactory.selectedLetters.length === 3) {
+            gameFactory.selectedLetters = [];
+            for (i = 0; i < (gameFactory.dimension * gameFactory.dimension); i++) {
+                gameFactory.tiles[i].clicked = false;
             }
         }
     };
 
+    gameFactory.getTiles = function() {
+        return $http.get('../data/world'+gameFactory.world+'.json')
+            .success(function(response){
+                gameFactory.loadedData = angular.fromJson(response);
+                gameFactory.initDataVariables();
+            })
+            .error(function(){
+                console.log("Error in the getTiles");
+            });
+    };
 
-    $scope.initLevel($scope.world);
+    return gameFactory;
 });
