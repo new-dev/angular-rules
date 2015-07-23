@@ -1,20 +1,23 @@
 var app = angular.module('App',[]);
 
 app.controller('mainCtrl', function($scope, gameFactory, styleFactory){
-    $scope.getPageName = function() {
+    $scope.pageName = function() {
       return styleFactory.page.name;
     };
-    $scope.getPageTitle = function() {
+    $scope.pageTitle = function() {
         return styleFactory.page.title;
     };
-    $scope.getWidthOfTiles = function() {
+    $scope.widthOfTiles = function() {
         return styleFactory.widthOfTiles;
     };
     $scope.selectLetter = function(letter, index) {
         gameFactory.selectLetter(letter, index);
     };
+    $scope.score = function() {
+        return gameFactory.score;
+    };
     gameFactory.getTiles().then(function() {
-        $scope.getTiles = function() {
+        $scope.tiles = function() {
             return gameFactory.tiles;
         }
     });
