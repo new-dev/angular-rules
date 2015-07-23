@@ -1,9 +1,16 @@
 var app = angular.module('App',[]);
 
-app.controller('mainCtrl', function($scope, gameFactory){
-    gameFactory.getTiles().then(function(){
+app.controller('mainCtrl', function($scope, gameFactory, styleFactory){
+    $scope.getPageTitle = function()
+    {
+        return styleFactory.page.title;
+    };
+    gameFactory.getTiles().then(function() {
         $scope.tiles = gameFactory.tiles;
     });
+    $scope.getWidthOfTiles = function() {
+        return styleFactory.widthOfTiles;
+    };
 });
 
 app.factory('gameFactory', function($http){
@@ -42,9 +49,6 @@ app.factory('gameFactory', function($http){
         var newObject = {},
             i;
         for (i=0; i < gameFactory.numberOfLetters; i++) {
-            /**Used Below for testing purposed of tiles. Will not be randomly generated here
-             newObject = new tile(gameFactory.alphabete[Math.floor((Math.random() * 25) + 0)], false);
-             */
             newObject = new gameFactory.tileObj(gameFactory.loadedDataLetters[i],false);
             gameFactory.tiles.push(newObject);
         }
@@ -97,4 +101,23 @@ app.factory('gameFactory', function($http){
     };
 
     return gameFactory;
+});
+
+app.factory('styleFactory', function(gameFactory){
+    var styleFactory = {};
+
+    styleFactory.widthOfTiles = {
+        width : 100/4 + '%',
+        height : 100/4 + '%'
+    };
+    styleFactory.widthOfLetters = {
+        width : 100/4 + '%',
+        height : 100/4 + '%'
+    };
+    styleFactory.page = {
+        'name' : 'Un-named',
+        'title' : 'Hello'
+    };
+
+    return styleFactory;
 });

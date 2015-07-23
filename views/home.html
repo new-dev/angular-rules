@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="header">
-    <h1 class="header-title">{{page.title}}</h1>
+    <h1 class="header-title">{{getPageTitle()}}</h1>
     <div class="header-options">
         <button type="button" class="btn btn-success">
             <span class="glyphicon glyphicon-play"></span>
@@ -25,10 +25,10 @@
     <div class="tile-table">
         <h1 class="text-success">Score: {{score}}</h1>
         <div ng-repeat="tile in tiles track by $index" ng-click="selectLetter(tile.letter, $index)">
-            <button class="tile btn btn-lg btn-info" ng-style="setWidthOfTiles" ng-show="!tile.clicked">
+            <button class="tile btn btn-lg btn-info" ng-style="getWidthOfTiles()" ng-show="!tile.clicked">
                 {{tile.letter.toUpperCase()}}
             </button>
-            <button class="tile btn btn-lg btn-warning clicked" ng-style="setWidthOfTiles" ng-show="tile.clicked">
+            <button class="tile btn btn-lg btn-warning clicked" ng-style="getWidthOfTiles()" ng-show="tile.clicked">
                 {{tile.letter.toUpperCase()}}
             </button>
         </div>
