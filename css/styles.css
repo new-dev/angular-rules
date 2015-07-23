@@ -17,6 +17,16 @@ body {
 h4:hover {
     color: darkgray;
 }
+
+.btn:focus {
+    background-color: #5bc0de;
+    border-color: #46b8da;
+    outline:0 !important;
+}
+.btn:focus:hover {
+    background-color: #31b0d5;
+    border-color: #269abc;
+}
 /*------------------------------------------------------
 2.0 Common Components
 ------------------------------------------------------*/
@@ -75,7 +85,7 @@ h4:hover {
     font-size: 4em;
     border-radius: 0;
     border-style: solid;
-    border-width: 5px;
+    border-width: 3px;
 }
 
 .letter {
@@ -84,8 +94,6 @@ h4:hover {
     margin-top: 60px;
     font-size: 4em;
 }
-
-
 /*------------------------------------------------------
 3.0
 ------------------------------------------------------*/
