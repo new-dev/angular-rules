@@ -5,13 +5,14 @@ app.controller('mainCtrl', function($scope, $http){
     $scope.numberOfLetters = $scope.dimension*$scope.dimension;
     $scope.wordLength = 3;
     $scope.world = 1;
+    $scope.level = "level1";
     $scope.score = 0;
     $scope.tiles = [];
     $scope.selectedLetters = [];
     /**All are being set at the moment. Will decide which one we want later..*/
-    $scope.loadedData;
-    $scope.loadedDataLetters;
-    $scope.loadedDataSolutions;
+    $scope.loadedData = {};
+    $scope.loadedDataLetters = [];
+    $scope.loadedDataSolutions = [];
     /**Alphabete will soon go away since they will not be randomly generated, Testing Purposes Only*/
     $scope.alphabete = [
         'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'
@@ -32,6 +33,23 @@ app.controller('mainCtrl', function($scope, $http){
         this.letter = letter;
         this.clicked = clicked;
     }
+
+    /*Async javascript stuff...*/
+    $scope.initLevel = function(world) {
+        $http.get('../data/world'+world+'.json').success(function(response){
+            $scope.loadedData = angular.fromJson(response);
+            $scope.initDataVariables();
+        });
+    };
+
+    $scope.initDataVariables = function(){
+        $scope.loadedDataLetters = $scope.loadedData[$scope.level].letters;
+        $scope.loadedDataSolutions = $scope.loadedData[$scope.level].solutions;
+        //Can have more laterrr
+
+        $scope.generateLetters();
+    };
+
     $scope.generateLetters = function() {
         var newObject = {},
             i;
@@ -78,16 +96,7 @@ app.controller('mainCtrl', function($scope, $http){
             }
         }
     };
-/*Async javascript stuff...*/
-    $scope.init = function(world) {
-        $http.get('../data/world'+world+'.json').success(function(response){
-            $scope.loadedData = response.mock1;
-            console.log(response.mock1);
-            $scope.loadedDataLetters = response.mock1.letters;
-            $scope.loadedDataSolutions = response.mock1.solutions;
-            $scope.generateLetters();
-        });
-    };
 
-    $scope.init($scope.world);
+
+    $scope.initLevel($scope.world);
 });
