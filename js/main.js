@@ -13,7 +13,6 @@ app.controller('mainCtrl', function($scope, gameFactory, styleFactory){
     $scope.selectLetter = function(letter, index) {
         gameFactory.selectLetter(letter, index);
     };
-
     $scope.score = function() {
         return gameFactory.score;
     };

@@ -8,12 +8,14 @@ angular.module('levelApp').factory('gameFactory', function($http){
     gameFactory.level = "level1";
     gameFactory.score = 0;
     gameFactory.tiles = [];
-    gameFactory.selectedLetters = [];
+    gameFactory.selectedLetters = {
+        "letters":[],
+        "indexes":[]
+    };
     gameFactory.tileObj = function(letter, clicked) {
         this.letter = letter;
         this.clicked = clicked;
     };
-
     /*Async javascript stuff...*/
     gameFactory.initLevel = function(world) {
         $http.get('../data/world'+world+'.json').success(function(response){
@@ -39,16 +41,20 @@ angular.module('levelApp').factory('gameFactory', function($http){
     };
 
     gameFactory.selectLetter = function(letter, index) {
-        if (gameFactory.selectedLetters.length < gameFactory.wordLength) {
+        if (gameFactory.selectedLetters.letters.length < gameFactory.wordLength) {
             if (!gameFactory.tiles[index].clicked) {
-                gameFactory.selectedLetters.push(letter);
+                gameFactory.selectedLetters.letters.push(letter);
+                gameFactory.selectedLetters.indexes.push(index);
                 gameFactory.tiles[index].clicked = !gameFactory.tiles[index].clicked;
             }
             else {
+                gameFactory.selectedLetters.letters.splice(gameFactory.selectedLetters.indexes.indexOf(index),1);
+                gameFactory.selectedLetters.indexes.splice(gameFactory.selectedLetters.indexes.indexOf(index),1);
+                console.log(gameFactory.selectedLetters);
                 gameFactory.tiles[index].clicked = !gameFactory.tiles[index].clicked;
             }
         }
-        gameFactory.checkIfWord(gameFactory.selectedLetters.join(""));
+        gameFactory.checkIfWord(gameFactory.selectedLetters.letters.join(""));
         gameFactory.resetTiles();
     };
 
@@ -66,8 +72,8 @@ angular.module('levelApp').factory('gameFactory', function($http){
 
     gameFactory.resetTiles = function(){
         var i;
-        if (gameFactory.selectedLetters.length === 3) {
-            gameFactory.selectedLetters = [];
+        if (gameFactory.selectedLetters.letters.length === 3) {
+            gameFactory.selectedLetters = {"letters":[],"indexes":[]};
             for (i = 0; i < (gameFactory.dimension * gameFactory.dimension); i++) {
                 gameFactory.tiles[i].clicked = false;
             }
